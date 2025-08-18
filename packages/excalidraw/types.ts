@@ -213,7 +213,6 @@ export type InteractiveCanvasAppState = Readonly<
   _CommonCanvasAppState & {
     // renderInteractiveScene
     activeEmbeddable: AppState["activeEmbeddable"];
-    editingLinearElement: AppState["editingLinearElement"];
     selectionElement: AppState["selectionElement"];
     selectedGroupIds: AppState["selectedGroupIds"];
     selectedLinearElement: AppState["selectedLinearElement"];
@@ -249,10 +248,10 @@ export type ObservedElementsAppState = {
   editingGroupId: AppState["editingGroupId"];
   selectedElementIds: AppState["selectedElementIds"];
   selectedGroupIds: AppState["selectedGroupIds"];
-  // Avoiding storing whole instance, as it could lead into state incosistencies, empty undos/redos and etc.
-  editingLinearElementId: LinearElementEditor["elementId"] | null;
-  // Right now it's coupled to `editingLinearElement`, ideally it should not be really needed as we already have selectedElementIds & editingLinearElementId
-  selectedLinearElementId: LinearElementEditor["elementId"] | null;
+  selectedLinearElement: {
+    elementId: LinearElementEditor["elementId"];
+    isEditing: boolean;
+  } | null;
   croppingElementId: AppState["croppingElementId"];
   lockedMultiSelections: AppState["lockedMultiSelections"];
   activeLockedId: AppState["activeLockedId"];
@@ -307,7 +306,6 @@ export interface AppState {
    * set when a new text is created or when an existing text is being edited
    */
   editingTextElement: NonDeletedExcalidrawElement | null;
-  editingLinearElement: LinearElementEditor | null;
   activeTool: {
     /**
      * indicates a previous tool we should revert back to if we deselect the
@@ -812,6 +810,7 @@ export type UnsubscribeCallback = () => void;
 
 export interface ExcalidrawImperativeAPI {
   updateScene: InstanceType<typeof App>["updateScene"];
+  applyDeltas: InstanceType<typeof App>["applyDeltas"];
   mutateElement: InstanceType<typeof App>["mutateElement"];
   updateLibrary: InstanceType<typeof Library>["updateLibrary"];
   resetScene: InstanceType<typeof App>["resetScene"];
