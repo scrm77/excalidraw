@@ -1203,7 +1203,7 @@ const ExcalidrawWrapper = () => {
                 "canvas.savedAt",
               )} ${lastSaveTime.toLocaleTimeString()}`;
             } else {
-              statusMessage = t("canvas.saved");
+              statusMessage = t("canvas.unsavedChanges");
             }
           } else if (saveStatus === "unsaved") {
             statusMessage = t("canvas.unsavedChanges");
