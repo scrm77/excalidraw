@@ -446,7 +446,6 @@ const ExcalidrawWrapper = () => {
   } = useCanvasManagement({
     storageAdapter,
     excalidrawAPI,
-    user,
     setErrorMessage,
     resetSaveStatus,
   });
@@ -709,6 +708,7 @@ const ExcalidrawWrapper = () => {
     };
 
     loadCanvas();
+    refreshCanvases();
 
     const onHashChange = async (event: HashChangeEvent) => {
       event.preventDefault();
@@ -832,7 +832,14 @@ const ExcalidrawWrapper = () => {
       );
       clearTimeout(titleTimeout);
     };
-  }, [isCollabDisabled, collabAPI, excalidrawAPI, setLangCode, storageAdapter]);
+  }, [
+    isCollabDisabled,
+    collabAPI,
+    excalidrawAPI,
+    setLangCode,
+    storageAdapter,
+    refreshCanvases,
+  ]);
 
   useEffect(() => {
     if (!excalidrawAPI) {

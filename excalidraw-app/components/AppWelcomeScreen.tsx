@@ -35,11 +35,11 @@ export const AppWelcomeScreen: React.FC<{
           {!user && (
             <WelcomeScreen.Center.MenuItem
               onSelect={() => {
-                window.location.href = "/auth/github/login";
+                window.location.href = "/auth/login";
               }}
               icon={GithubIcon}
             >
-              Login with GitHub
+              Login
             </WelcomeScreen.Center.MenuItem>
           )}
         </WelcomeScreen.Center.Menu>

@@ -55,8 +55,6 @@ export class IndexedDBStorageAdapter implements IStorageAdapter {
       name: data.appState.name || "Untitled Canvas",
       createdAt: now,
       updatedAt: now,
-      // UserID is 0 for local, non-synced canvases
-      userId: 0,
       thumbnail: data.elements.length > 0 ? thumbnail : undefined,
     };
 

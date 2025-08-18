@@ -27,7 +27,7 @@ export const AppMainMenu: React.FC<{
   const setSaveAsDialog = useSetAtom(saveAsDialogAtom);
 
   const handleLogin = () => {
-    window.location.href = "/auth/github/login";
+    window.location.href = "/auth/login";
   };
 
   const handleLogout = () => {
@@ -86,16 +86,18 @@ export const AppMainMenu: React.FC<{
               flexShrink: 1,
             }}
           >
-            <img
-              src={user.avatarUrl}
-              alt={user.login}
-              style={{
-                width: "24px",
-                height: "24px",
-                borderRadius: "50%",
-                flexShrink: 0,
-              }}
-            />
+            {user.avatarUrl && (
+              <img
+                src={user.avatarUrl}
+                alt={user.login}
+                style={{
+                  width: "24px",
+                  height: "24px",
+                  borderRadius: "50%",
+                  flexShrink: 0,
+                }}
+              />
+            )}
             <span
               style={{
                 whiteSpace: "nowrap",
@@ -133,7 +135,7 @@ export const AppMainMenu: React.FC<{
         </div>
       ) : (
         <MainMenu.Item onSelect={handleLogin} icon={GithubIcon}>
-          Login with GitHub
+          Login
         </MainMenu.Item>
       )}
       <MainMenu.Separator />

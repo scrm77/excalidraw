@@ -39,9 +39,10 @@ export const useAtomWithInitialValue = <
 };
 
 export type User = {
-  id: number;
-  githubId: number;
+  id: string;
+  subject: string;
   login: string;
+  email?: string;
   name: string;
   avatarUrl: string;
 };
@@ -85,8 +86,11 @@ const STORAGE_CONFIG_SESSION_STORAGE_KEY =
 
 const getInitialStorageConfig = (): StorageConfig => {
   const defaultConfig: StorageConfig = { type: "indexed-db" };
-
   try {
+    const _prevConfig = localStorage.getItem(STORAGE_CONFIG_LOCAL_STORAGE_KEY);
+    const defaultConfig: StorageConfig = _prevConfig
+      ? JSON.parse(_prevConfig)
+      : { type: "indexed-db" };
     const nonSensitive = localStorage.getItem(STORAGE_CONFIG_LOCAL_STORAGE_KEY);
     const sensitive = sessionStorage.getItem(
       STORAGE_CONFIG_SESSION_STORAGE_KEY,

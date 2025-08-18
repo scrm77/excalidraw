@@ -163,7 +163,10 @@ export default defineConfig(({ mode }) => {
             "service-worker.js",
             "**/*.chunk-*.js",
           ],
-          navigateFallbackDenylist: [/^\/api/, /^\/auth/],
+          navigateFallbackDenylist: [
+            /^\/api/,
+            /^\/auth/,
+          ],
           runtimeCaching: [
             {
               urlPattern: new RegExp(".+.woff2"),

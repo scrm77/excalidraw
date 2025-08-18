@@ -15,18 +15,15 @@ import type {
   CanvasMetadata,
   CanvasData,
 } from "../data/storage";
-import type { User } from "../app-jotai";
 
 export const useCanvasManagement = ({
   storageAdapter,
   excalidrawAPI,
-  user,
   setErrorMessage,
   resetSaveStatus,
 }: {
   storageAdapter: IStorageAdapter;
   excalidrawAPI: ExcalidrawImperativeAPI | null | undefined;
-  user: User | null;
   setErrorMessage: (msg: string) => void;
   resetSaveStatus: () => void;
 }) => {
