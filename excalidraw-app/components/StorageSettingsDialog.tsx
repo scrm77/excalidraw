@@ -2,91 +2,24 @@ import React, { useState } from "react";
 
 import { Dialog } from "@excalidraw/excalidraw/components/Dialog";
 import { Island } from "@excalidraw/excalidraw/components/Island";
-import { TextField } from "@excalidraw/excalidraw/components/TextField";
 import { FilledButton } from "@excalidraw/excalidraw/components/FilledButton";
 
 import { useAtom } from "../app-jotai";
 import { storageConfigAtom } from "../app-jotai";
 
-export type StorageType = "default" | "kv" | "s3" | "indexed-db";
+export type StorageType = "default" | "indexed-db";
 
 const StorageSettingsDialog = ({ onClose }: { onClose: () => void }) => {
   const [config, setConfig] = useAtom(storageConfigAtom);
   const [storageType, setStorageType] = useState<StorageType>(config.type);
 
-  // Local state for form inputs
-  const [kvUrl, setKvUrl] = useState(config.kvUrl || "");
-  const [kvApiToken, setKvApiToken] = useState(config.kvApiToken || "");
-  const [s3AccessKeyId, setS3AccessKeyId] = useState(
-    config.s3AccessKeyId || "",
-  );
-  const [s3SecretAccessKey, setS3SecretAccessKey] = useState(
-    config.s3SecretAccessKey || "",
-  );
-  const [s3Region, setS3Region] = useState(config.s3Region || "");
-  const [s3BucketName, setS3BucketName] = useState(config.s3BucketName || "");
-
   const handleSave = () => {
-    setConfig({
-      type: storageType,
-      kvUrl,
-      kvApiToken,
-      s3AccessKeyId,
-      s3SecretAccessKey,
-      s3Region,
-      s3BucketName,
-    });
+    setConfig({ type: storageType });
     onClose();
   };
 
   const renderForm = () => {
     switch (storageType) {
-      case "kv":
-        return (
-          <>
-            <TextField
-              label="KV URL"
-              value={kvUrl}
-              placeholder="Your Cloudflare KV URL"
-              onChange={setKvUrl}
-            />
-            <TextField
-              label="API Token"
-              value={kvApiToken}
-              placeholder="Your Cloudflare API Token"
-              onChange={setKvApiToken}
-            />
-          </>
-        );
-      case "s3":
-        return (
-          <>
-            <TextField
-              label="Access Key ID"
-              value={s3AccessKeyId}
-              placeholder="Your AWS Access Key ID"
-              onChange={setS3AccessKeyId}
-            />
-            <TextField
-              label="Secret Access Key"
-              value={s3SecretAccessKey}
-              placeholder="Your AWS Secret Access Key"
-              onChange={setS3SecretAccessKey}
-            />
-            <TextField
-              label="Region"
-              value={s3Region}
-              placeholder="e.g., us-east-1"
-              onChange={setS3Region}
-            />
-            <TextField
-              label="Bucket Name"
-              value={s3BucketName}
-              placeholder="Your S3 Bucket Name"
-              onChange={setS3BucketName}
-            />
-          </>
-        );
       case "indexed-db":
         return (
           <p>
@@ -112,10 +45,7 @@ const StorageSettingsDialog = ({ onClose }: { onClose: () => void }) => {
       className="storage-settings-dialog"
     >
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <p>
-          Security Warning: Sensitive keys are stored only in your browser's
-          session storage and are cleared when you close the tab.
-        </p>
+        <p>Choose where this browser should keep your editable canvases.</p>
 
         <select
           value={storageType}
@@ -126,10 +56,8 @@ const StorageSettingsDialog = ({ onClose }: { onClose: () => void }) => {
             border: "1px solid var(--color-border-outline)",
           }}
         >
-          <option value="indexed-db">Browser (IndexedDB)</option>
-          <option value="default">Default Backend (Online)</option>
-          <option value="kv">Cloudflare KV (Online)</option>
-          <option value="s3">Amazon S3 (Online)</option>
+          <option value="indexed-db">This browser only</option>
+          <option value="default">My server (online)</option>
         </select>
 
         <Island style={{ padding: "1rem" }}>

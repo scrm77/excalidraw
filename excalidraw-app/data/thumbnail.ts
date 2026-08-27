@@ -1,20 +1,21 @@
 import { exportToCanvas } from "@excalidraw/utils/export";
+import { getNonDeletedElements } from "@excalidraw/element";
 
 import { DEFAULT_EXPORT_PADDING } from "@excalidraw/common/constants";
 
 import type { AppState, BinaryFiles } from "@excalidraw/excalidraw/types";
-import type { NonDeletedExcalidrawElement } from "@excalidraw/element/types";
+import type { ExcalidrawElement } from "@excalidraw/element/types";
 
 const THUMBNAIL_WIDTH = 200;
 const THUMBNAIL_HEIGHT = 200;
 
 export const generateThumbnail = async (
-  elements: readonly NonDeletedExcalidrawElement[],
+  elements: readonly ExcalidrawElement[],
   appState: AppState,
   files: BinaryFiles,
 ): Promise<string> => {
   const canvas = await exportToCanvas({
-    elements,
+    elements: getNonDeletedElements(elements),
     appState,
     files,
     exportPadding: DEFAULT_EXPORT_PADDING,

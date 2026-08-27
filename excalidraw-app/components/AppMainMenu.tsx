@@ -4,7 +4,7 @@ import { MainMenu } from "@excalidraw/excalidraw/index";
 import {
   GithubIcon,
   saveAs,
-  extraToolsIcon,
+  settingsIcon,
 } from "@excalidraw/excalidraw/components/icons";
 
 import DropdownMenuItemLink from "@excalidraw/excalidraw/components/dropdownMenu/DropdownMenuItemLink";
@@ -19,7 +19,6 @@ export const AppMainMenu: React.FC<{
   isCollaborating: boolean;
   isCollabEnabled: boolean;
   theme: Theme | "system";
-  setTheme: (theme: Theme | "system") => void;
   refresh: () => void;
   onStorageSettingsClick: () => void;
 }> = React.memo((props) => {
@@ -60,7 +59,7 @@ export const AppMainMenu: React.FC<{
       <MainMenu.Separator />
       <MainMenu.Item
         onSelect={props.onStorageSettingsClick}
-        icon={extraToolsIcon}
+        icon={settingsIcon}
       >
         Data Source Settings...
       </MainMenu.Item>
@@ -147,11 +146,8 @@ export const AppMainMenu: React.FC<{
         GitHub
       </DropdownMenuItemLink>
       <MainMenu.Separator />
-      <MainMenu.DefaultItems.ToggleTheme
-        allowSystemTheme
-        theme={props.theme}
-        onSelect={props.setTheme}
-      />
+      <MainMenu.DefaultItems.Preferences />
+      <MainMenu.DefaultItems.ToggleTheme allowSystemTheme theme={props.theme} />
       <MainMenu.ItemCustom>
         <LanguageList style={{ width: "100%" }} />
       </MainMenu.ItemCustom>
