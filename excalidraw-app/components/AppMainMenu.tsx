@@ -3,6 +3,7 @@ import { MainMenu } from "@excalidraw/excalidraw/index";
 
 import {
   GithubIcon,
+  loginIcon,
   saveAs,
   settingsIcon,
 } from "@excalidraw/excalidraw/components/icons";
@@ -133,7 +134,7 @@ export const AppMainMenu: React.FC<{
           </button>
         </div>
       ) : (
-        <MainMenu.Item onSelect={handleLogin} icon={GithubIcon}>
+        <MainMenu.Item onSelect={handleLogin} icon={loginIcon}>
           Login
         </MainMenu.Item>
       )}

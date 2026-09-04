@@ -5,7 +5,7 @@ import type { User } from "../app-jotai";
 
 export const useAuth = (setUser: (user: User | null) => void) => {
   useEffect(() => {
-    // Check for token in URL params, which happens after GitHub login redirect.
+    // Check for token in URL params, which happens after the identity provider redirects back.
     const searchParams = new URLSearchParams(window.location.search);
     const token = searchParams.get("token");
     if (token) {

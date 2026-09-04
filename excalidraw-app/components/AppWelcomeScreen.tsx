@@ -1,5 +1,5 @@
 import React from "react";
-import { GithubIcon } from "@excalidraw/excalidraw/components/icons";
+import { loginIcon } from "@excalidraw/excalidraw/components/icons";
 import { useI18n } from "@excalidraw/excalidraw/i18n";
 import { WelcomeScreen } from "@excalidraw/excalidraw/index";
 
@@ -37,7 +37,7 @@ export const AppWelcomeScreen: React.FC<{
               onSelect={() => {
                 window.location.href = "/auth/login";
               }}
-              icon={GithubIcon}
+              icon={loginIcon}
             >
               Login
             </WelcomeScreen.Center.MenuItem>
