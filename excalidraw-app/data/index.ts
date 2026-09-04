@@ -276,6 +276,12 @@ export const exportToBackend = async (
   );
 
   try {
+    const token = localStorage.getItem("token");
+    const headers: Record<string, string> = {};
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
+
     const filesMap = new Map<FileId, BinaryFileData>();
     for (const element of elements) {
       if (isInitializedImageElement(element) && files[element.fileId]) {
@@ -291,6 +297,7 @@ export const exportToBackend = async (
 
     const response = await fetch(BACKEND_V2_POST, {
       method: "POST",
+      headers,
       body: payload.buffer as ArrayBuffer,
     });
     const json = await response.json();
