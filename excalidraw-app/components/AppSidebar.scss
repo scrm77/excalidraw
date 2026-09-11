@@ -1,4 +1,15 @@
 .excalidraw {
+  // Compatibility guard for the custom tabs mounted into upstream's
+  // DefaultSidebar. Flex items default to min-height: auto, which lets a tall
+  // tab expand beyond the sidebar and get clipped by its overflow: hidden
+  // instead of scrolling inside the tab.
+  .app-sidebar {
+    .sidebar-tabs-root,
+    [role="tabpanel"] {
+      min-height: 0;
+    }
+  }
+
   .app-sidebar-promo-container {
     padding: 0.75rem;
     display: flex;

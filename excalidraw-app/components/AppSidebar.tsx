@@ -86,7 +86,7 @@ export const AppSidebar = ({
   const { theme, openSidebar } = useUIAppState();
 
   return (
-    <DefaultSidebar>
+    <DefaultSidebar className="app-sidebar">
       <DefaultSidebar.TabTriggers>
         <Sidebar.TabTrigger
           tab={CREATIONS_SIDEBAR_NAME}
