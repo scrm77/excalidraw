@@ -162,6 +162,8 @@ export default defineConfig(({ mode }) => {
         },
 
         workbox: {
+          // Server routes must reach the backend, including OAuth callbacks.
+          navigateFallbackDenylist: [/^\/auth(?:\/|$)/, /^\/api(?:\/|$)/],
           // don't precache fonts, locales and separate chunks
           globIgnores: [
             "fonts.css",
